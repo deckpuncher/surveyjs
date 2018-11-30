@@ -1,6 +1,7 @@
-function Question(heading, prompt) {
+function Question(heading, prompt, isYesNo) {
     this.heading = heading;
     this.prompt = prompt;
+    this.isYesNo = isYesNo;
     this.statements = [];
     this.rules = [];
     this.answer = null;
@@ -33,7 +34,9 @@ function QuestionRule(requiredScore, result) {
 
 function Survey() {
     this.questions = [];
+    this.yesNoQuestions = [];
     this.currentQuestionIndex = 0;
+
     this.currentQuestion = function () {
         return this.questions[this.currentQuestionIndex];
     }
@@ -71,6 +74,13 @@ function initSurvey() {
     q2.addRule(2, "you should visit this link2");
     survey.questions.push(q2);
 
+    var q3 = new Question("Important question", "This is the first yes/no?", true);
+    q3.addRule(0, "This is super important");
+    survey.yesNoQuestions.push(q3);
+
+    var q4 = new Question("Other impoartant question", "This is the second yes/no?", true);
+    survey.yesNoQuestions.push(q4);
+
     renderSurvey(survey);
 }
 
@@ -78,6 +88,7 @@ function renderSurvey(survey) {
     // make the anchor point configurable
     // document.body.insertAdjacentHTML('beforeend', buildTag("div", "", "id='survey-container'"));
     survey.questions.forEach(renderQuestion);
+    renderQuestion(survey.yesNoQuestions[0], 0);
 }
 
 function renderQuestion(question, questionNumber) {
@@ -86,21 +97,35 @@ function renderQuestion(question, questionNumber) {
     inner.push(buildTag("div", buildTag("span", question.heading), "class='heading'"));
     inner.push(buildTag("div", buildTag("span", question.prompt), "class='question'"));
 
-    var statements = [];
-    question.statements.forEach(function (statement) {
-        statements.push(buildTag("li", statement));
-    });
-    inner.push(buildTag("ul", statements.join("")));
-
     var buttons = [];
-    for (i = 0; i < question.statements.length; i++) {
+    if (question.isYesNo) {
         var attrs = [];
-        attrs.push(`value=${i}`);
-        attrs.push("onclick='answerClicked(this)'");
-        attrs.push(`survey-question-num='${questionNumber}'`);
-        var button = buildTag("button", i, attrs.join(" "));
+        attrs.push("value='Yes'");
+        attrs.push("onclick='yesNoAnswerClicked(this)'");
+        buttons.push(buildTag("button", "Yes", attrs.join(" ")));
 
-        buttons.push(button);
+        attrs = [];
+        attrs.push("value='No'");
+        attrs.push("onclick='yesNoAnswerClicked(this)'");
+        buttons.push(buildTag("button", "No", attrs.join(" ")))
+    }
+    else {
+        var statements = [];
+        question.statements.forEach(function (statement) {
+            statements.push(buildTag("li", statement));
+        });
+        inner.push(buildTag("ul", statements.join("")));
+
+
+        for (i = 0; i < question.statements.length; i++) {
+            var attrs = [];
+            attrs.push(`value=${i}`);
+            attrs.push("onclick='answerClicked(this)'");
+            attrs.push(`survey-question-num='${questionNumber}'`);
+            var button = buildTag("button", i, attrs.join(" "));
+
+            buttons.push(button);
+        }
     }
 
     inner.push(buildTag("div", buttons.join(""), "class='button-row'"));
@@ -110,16 +135,11 @@ function renderQuestion(question, questionNumber) {
 }
 
 function answerClicked(button) {
-    var questionNum = button.closest(".survey-question").getAttribute("survey-question-num");
+    var parent = button.closest(".survey-question");
+    var questionNum = parent.getAttribute("survey-question-num");
     var rule = survey.questions[questionNum].recordAnswer(button.value);
-    var parent = document.querySelector(`div[survey-question-num='${questionNum}']`);
-    var answer = parent.querySelector(".survey-answer-statement");
-    if (answer) {
-        answer.parentNode.removeChild(answer);
-    }
-    if (rule) {
-        parent.insertAdjacentHTML('beforeend', buildTag("div", rule.result, "class='survey-answer-statement'"));
-    }
+    renderAnswerResponse(rule, parent);
+   
     if (survey.completed()) {
         var table = document.querySelector("#survey-results");
         if (table) {
@@ -139,6 +159,31 @@ function answerClicked(button) {
 
         var container = document.body.querySelector("#survey-container");
         container.insertAdjacentHTML('beforeend', buildTag("table", tableRows.join(""), "id='survey-results'"));
+    }
+}
+
+function renderAnswerResponse(rule, parent){
+    var answer = parent.querySelector(".survey-answer-statement");
+    if (answer) {
+        answer.parentNode.removeChild(answer);
+    }
+    if (rule) {
+        parent.insertAdjacentHTML('beforeend', buildTag("div", rule.result, "class='survey-answer-statement'"));
+    }
+}
+
+function yesNoAnswerClicked(button) {
+    var questionNum = button.closest(".survey-question").getAttribute("survey-question-num")
+    if (button.value === "Yes") {
+        var next = parseInt(questionNum) + 1;
+        if (survey.yesNoQuestions.length >= next + 1) {
+            renderQuestion(survey.yesNoQuestions[next], next);
+        }
+    }
+    else {
+        var rule = survey.yesNoQuestions[questionNum].recordAnswer(0);
+        var parent = button.closest(".survey-question");
+        renderAnswerResponse(rule, parent)
     }
 }
 
