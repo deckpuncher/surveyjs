@@ -71,12 +71,12 @@ function initSurvey() {
     q2.addRule(2, "you should visit this link2");
     survey.questions.push(q2);
 
-    document.body.innerHTML += buildTag("div", "", "id='survey-container'");
-
     renderSurvey(survey);
 }
 
 function renderSurvey(survey) {
+    // make the anchor point configurable
+    // document.body.insertAdjacentHTML('beforeend', buildTag("div", "", "id='survey-container'"));
     survey.questions.forEach(renderQuestion);
 }
 
@@ -95,7 +95,7 @@ function renderQuestion(question, questionNumber) {
     var buttons = [];
     for (i = 0; i < question.statements.length; i++) {
         var attrs = [];
-        attrs.push("value=" + i);
+        attrs.push(`value=${i}`);
         attrs.push("onclick='answerClicked(this)'");
         attrs.push(`survey-question-num='${questionNumber}'`);
         var button = buildTag("button", i, attrs.join(" "));
@@ -118,7 +118,7 @@ function answerClicked(button) {
         answer.parentNode.removeChild(answer);
     }
     if (rule) {
-        parent.innerHTML += buildTag("div", rule.result, "class='survey-answer-statement'");
+        parent.insertAdjacentHTML('beforeend', buildTag("div", rule.result, "class='survey-answer-statement'"));
     }
     if (survey.completed()) {
         var table = document.querySelector("#survey-results");
