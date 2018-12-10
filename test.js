@@ -60,38 +60,72 @@ function Survey() {
 }
 
 function initSurvey() {
-    var q1 = new Question("Question 1", "Of these statements, how many can you confidently answer YES to?", "VISION");
-    q1.addStatement("I have this thing");
-    q1.addStatement("I have this other thing");
-    q1.addStatement("I do this thing");
-    q1.priority = 1;
+    var questions = [
+        {
+            "heading": "Question 1",
+            "prompt": "Of these statements, how many can you confidently answer YES to?",
+            "category": "VISION",
+            "statements": [
+                "I have this thing",
+                "I have this other thing",
+                "I do this thing"
+            ],
+            "rules": [
+                {
+                    "requiredScore": 2,
+                    "result": "you should visit this link"
+                }
+            ],
+            "answer": null,
+            "priority": 1
+        },
+        {
+            "heading": "Question 2",
+            "prompt": "2Of these statements, how many can you confidently answer YES to?",
+            "category": "WHY",
+            "statements": [
+                "2I have this thing",
+                "2I have this other thing",
+                "2I do this thing"
+            ],
+            "rules": [
+                {
+                    "requiredScore": 2,
+                    "result": "you should visit this link2"
+                }
+            ],
+            "answer": null,
+            "priority": 1
+        },
+        {
+            "heading": "Question 3",
+            "prompt": "Of these statements, how many can you confidently answer YES to?",
+            "category": "CUSTOMER",
+            "statements": [
+                "2I have this thing",
+                "2I have this other thing",
+                "2I do this thing"
+            ],
+            "rules": [],
+            "answer": null,
+            "priority": 2
+        },
+        {
+            "heading": "Question 4",
+            "prompt": "Of these statements, how many can you confidently answer YES to?",
+            "category": "PRODUCTS",
+            "statements": [
+                "2I have this thing",
+                "2I have this other thing",
+                "2I do this thing"
+            ],
+            "rules": [],
+            "answer": null,
+            "priority": 3
+        }
+    ]
 
-    q1.addRule(2, "you should visit this link");
-    survey.questions.push(q1);
-
-    var q2 = new Question("Question 2", "2Of these statements, how many can you confidently answer YES to?", "WHY");
-    q2.addStatement("2I have this thing");
-    q2.addStatement("2I have this other thing");
-    q2.addStatement("2I do this thing");
-    q2.priority = 1;
-
-    q2.addRule(2, "you should visit this link2");
-    survey.questions.push(q2);
-
-    var q3 = new Question("Question 3", "Of these statements, how many can you confidently answer YES to?", "CUSTOMER");
-    q3.addStatement("2I have this thing");
-    q3.addStatement("2I have this other thing");
-    q3.addStatement("2I do this thing");
-    q3.priority = 2;
-    survey.questions.push(q3);
-
-    var q4 = new Question("Question 4", "Of these statements, how many can you confidently answer YES to?", "PRODUCTS");
-    q4.addStatement("2I have this thing");
-    q4.addStatement("2I have this other thing");
-    q4.addStatement("2I do this thing");
-    q4.priority = 3;
-    survey.questions.push(q4);
-
+    survey.questions = questions;
     renderSurvey(survey);
 }
 
@@ -166,7 +200,7 @@ function answerClicked(button) {
         var priority = null;
         var closeRow = false;
 
-        questions.forEach(function (question, index) { 
+        questions.forEach(function (question, index) {
             var warning = question.answer < (question.statements.length / 2);
             if (priority !== question.priority) {
                 priority = question.priority;
@@ -178,7 +212,7 @@ function answerClicked(button) {
             }
 
             tableRows.push("<td ");
-            if (warning){
+            if (warning) {
                 tableRows.push("class='warning'");
             }
             tableRows.push(">");
@@ -227,6 +261,19 @@ function compare(a, b) {
     if (a.priority > b.priority)
         return 1;
     return 0;
+}
+
+function loadJSON(callback) {
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', 'my_data.json', true); // Replace 'my_data' with the path to your file
+    xobj.onreadystatechange = function () {
+        if (xobj.readyState == 4 && xobj.status == "200") {
+            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+            callback(xobj.responseText);
+        }
+    };
+    xobj.send(null);
 }
 
 function buildTag(tag, value, attributes) {

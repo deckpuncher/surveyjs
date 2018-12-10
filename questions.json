@@ -1,0 +1,64 @@
+[
+    {
+        "heading": "Question 1",
+        "prompt": "Of these statements, how many can you confidently answer YES to?",
+        "category": "VISION",
+        "statements": [
+            "I have this thing",
+            "I have this other thing",
+            "I do this thing"
+        ],
+        "rules": [
+            {
+                "requiredScore": 2,
+                "result": "you should visit this link"
+            }
+        ],
+        "answer": null,
+        "priority": 1
+    },
+    {
+        "heading": "Question 2",
+        "prompt": "2Of these statements, how many can you confidently answer YES to?",
+        "category": "WHY",
+        "statements": [
+            "2I have this thing",
+            "2I have this other thing",
+            "2I do this thing"
+        ],
+        "rules": [
+            {
+                "requiredScore": 2,
+                "result": "you should visit this link2"
+            }
+        ],
+        "answer": null,
+        "priority": 1
+    },
+    {
+        "heading": "Question 3",
+        "prompt": "Of these statements, how many can you confidently answer YES to?",
+        "category": "CUSTOMER",
+        "statements": [
+            "2I have this thing",
+            "2I have this other thing",
+            "2I do this thing"
+        ],
+        "rules": [],
+        "answer": null,
+        "priority": 2
+    },
+    {
+        "heading": "Question 4",
+        "prompt": "Of these statements, how many can you confidently answer YES to?",
+        "category": "PRODUCTS",
+        "statements": [
+            "2I have this thing",
+            "2I have this other thing",
+            "2I do this thing"
+        ],
+        "rules": [],
+        "answer": null,
+        "priority": 3
+    }
+]
