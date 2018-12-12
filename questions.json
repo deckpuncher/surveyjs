@@ -1,64 +1,178 @@
 [
     {
-        "heading": "Question 1",
+        "heading": "Your VISION & WHY",
         "prompt": "Of these statements, how many can you confidently answer YES to?",
         "category": "VISION",
         "statements": [
-            "I have this thing",
-            "I have this other thing",
-            "I do this thing"
+            "I know what I want my business to look like in 3-5 years time",
+            "I have either written my vision down or created a mood board previously, showing what the vision is",
+            "I know the greater purpose of my business and the change I want to make in people’s lives",
+            "I understand why I think it's important that I run my own business, as opposed to being in traditional employment"
         ],
         "rules": [
             {
-                "requiredScore": 2,
-                "result": "you should visit this link"
+                "requiredScore": 3,
+                "result": "Your answers and the priority grid of the key areas show you need to work on your VISION and WHY right now."
             }
         ],
         "answer": null,
         "priority": 1
     },
     {
-        "heading": "Question 2",
-        "prompt": "2Of these statements, how many can you confidently answer YES to?",
-        "category": "WHY",
-        "statements": [
-            "2I have this thing",
-            "2I have this other thing",
-            "2I do this thing"
-        ],
-        "rules": [
-            {
-                "requiredScore": 2,
-                "result": "you should visit this link2"
-            }
-        ],
-        "answer": null,
-        "priority": 1
-    },
-    {
-        "heading": "Question 3",
+        "heading": "Your PRODUCT",
         "prompt": "Of these statements, how many can you confidently answer YES to?",
-        "category": "CUSTOMER",
+        "category": "PRODUCT",
         "statements": [
-            "2I have this thing",
-            "2I have this other thing",
-            "2I do this thing"
+            "Within my products I have distinct price points (for example entry level, mid level, high end)",
+            "When pricing my products, I have included all costs of materials, the cost of labour time, and included some profit margin",
+            "I have allowed for wholesale pricing of my product",
+            "I have researched my customer and am confident I know the value they see in my product",
+            "I can easily list all the benefits that the features of my product brings to my customer",
+            "I know where my product sits in the product market"
         ],
-        "rules": [],
+        "rules": [
+            {
+                "requiredScore": 4,
+                "result": "Your answers and the priority grid of the key areas show you need to work on your PRODUCT right now."
+            }
+        ],
         "answer": null,
         "priority": 2
     },
     {
-        "heading": "Question 4",
+        "heading": "Your CUSTOMER",
         "prompt": "Of these statements, how many can you confidently answer YES to?",
-        "category": "PRODUCTS",
+        "category": "CUSTOMER",
         "statements": [
-            "2I have this thing",
-            "2I have this other thing",
-            "2I do this thing"
+            "I know what my customers' deeper level pain points are",
+            "I can describe my customer fairly intimately in a few sentences",
+            "I know what motivates my customer to buy my product",
+            "I know where I can reach out to potential customers where they will want to listen",
+            "I know what my customers values are",
+            "I know how to speak effectively to my customer",
+            "I know the demographics of my customer well",
+            "I know the psychographics and behaviours of my customer well"
         ],
-        "rules": [],
+        "rules": [
+            {
+                "requiredScore": 6,
+                "result": "Your answers and the priority grid of the key areas show you need to work on your CUSTOMER right now."
+            }
+        ],
+        "answer": null,
+        "priority": 2
+    },
+    {
+        "heading": "Your MESSAGING",
+        "prompt": "Of these statements, how many can you confidently answer YES to?",
+        "category": "MESSAGING",
+        "statements": [
+            "I am confident I know what the purpose of my business is and could tell someone my mission statement if they asked me",
+            "My brand personality comes across clearly in all touch points with my customers",
+            "The style of all the photography and imaging in my business matches my brand personality",
+            "I know what the core values of my business are",
+            "My visual branding is consistent with my business personality",
+            "My photography is high-quality across all touch-points"
+        ],
+        "rules": [
+            {
+                "requiredScore": 4,
+                "result": "Your answers and the priority grid of the key areas show you need to work on your MESSAGING right now."
+            }
+        ],
         "answer": null,
         "priority": 3
+    },
+    {
+        "heading": "Your WEBSITE",
+        "prompt": "Of these statements, how many can you confidently answer YES to?",
+        "category": "WEBSITE",
+        "statements": [
+            "I have tested the purchase process thoroughly",
+            "My products are easily accessible from the front page",
+            "I've included my story and photo on my About page",
+            "What I sell is immediately clear to new visitors to my website",
+            "I know how much traffic my site receives every month",
+            "I know what my conversion rate is (number of sales divided by monthly visitors)",
+            "I understand how SEO works to drive organic traffic to my website",
+            "I have an email list to build relationships with my customers"
+        ],
+        "rules": [
+            {
+                "requiredScore": 6,
+                "result": "Your answers and the priority grid of the key areas show you need to work on your WEBSITE right now."
+            }
+        ],
+        "answer": null,
+        "priority": 4
+    },
+    {
+        "heading": "Your PLAN",
+        "prompt": "Of these statements, how many can you confidently answer YES to?",
+        "category": "PLAN",
+        "statements": [
+            "I have measurable goals that are moving me towards what I want my business to look like in 3-5 years time",
+            "I am confident that everything I do day-to-day is moving me towards those goals",
+            "I believe my business can be a success",
+            "I have a clear strategy on how to move my business forward",
+            "I have clear income goals and I know how much I have to sell to achieve these",
+            "I follow action plans for every goal I set"
+        ],
+        "rules": [
+            {
+                "requiredScore": 4,
+                "result": "Your answers and the priority grid of the key areas show you need to work on your PLAN right now."
+            }
+        ],
+        "answer": null,
+        "priority": 5
+    },
+    {
+        "heading": "Your MARKETING",
+        "prompt": "Of these statements, how many can you confidently answer YES to?",
+        "category": "MARKETING",
+        "statements": [
+            "I have clear objectives for my marketing efforts",
+            "I have a defined strategy for every marketing campaign",
+            "I know how to use social media effectively to grow my brand",
+            "I know definitively if blogging is a good marketing strategy for my business",
+            "I send regular emails to my subscribers",
+            "I know the ROI of all emails I send",
+            "I know how to target my customers effectively when using advertising",
+            "I track all my marketing efforts and know what works and what doesn't for my business"
+        ],
+        "rules": [
+            {
+                "requiredScore": 6,
+                "result": "Your answers and the priority grid of the key areas show you need to work on your MARKETING right now."
+            }
+        ],
+        "answer": null,
+        "priority": 6
+    },
+    {
+        "heading": "Your OPERATIONS",
+        "prompt": "Of these statements, how many can you confidently answer YES to?",
+        "category": "OPERATIONS",
+        "statements": [
+            "I have a set of procedures or workflows I follow for every repeatable task in my business",
+            "I know what my effective hourly rate is for all the different tasks in my business",
+            "I have identified what tasks I can or should be able to soon outsource to others",
+            "I have identified which times of the day I am most productive",
+            "I have developed a solid time management system for the average week and month",
+            "I regularly undertake professional development for my industry and my business",
+            "I track all my income and expenses diligently",
+            "I know all the tax and legal obligations for my own business",
+            "I have scheduled time for gathering inspiration and filling my creative mind",
+            "I have set times in my schedule for rest and rejevenation"
+        ],
+        "rules": [
+            {
+                "requiredScore": 8,
+                "result": "Your answers and the priority grid of the key areas show you need to work on your OPERATIONS right now."
+            }
+        ],
+        "answer": null,
+        "priority": 7
     }
 ]
