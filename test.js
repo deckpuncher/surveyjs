@@ -75,8 +75,8 @@ function initSurvey() {
             "goodScore": 3,
             "priority": 1,
             "result" : {
-                "text" : "this is the text",
-                "url" : "www.google.com"
+                "text" : "Your answers and the priority grid of the key areas show you need to work on your VISION and WHY right now.",
+                "url" : "https://www.themakers.academy/free-stuff/makers-audit-tool/result-vision-why/"
             }
         },
         {
@@ -95,8 +95,8 @@ function initSurvey() {
             "goodScore": 4,
             "priority": 2,
             "result" : {
-                "text" : "this is the text",
-                "url" : "www.google.com"
+                "text" : "Your answers and the priority grid of the key areas show you need to work on your PRODUCT right now.",
+                "url" : "https://www.themakers.academy/free-stuff/makers-audit-tool/result-product/"
             }
         },
         {
@@ -117,8 +117,8 @@ function initSurvey() {
             "answer": null,
             "priority": 2,
             "result" : {
-                "text" : "this is the text",
-                "url" : "www.google.com"
+                "text" : "Your answers and the priority grid of the key areas show you need to work on your CUSTOMER right now.",
+                "url" : "https://www.themakers.academy/free-stuff/makers-audit-tool/result-customer/"
             }
         },
         {
@@ -137,8 +137,8 @@ function initSurvey() {
             "goodScore": 5,
             "priority": 3,
             "result" : {
-                "text" : "this is the text",
-                "url" : "www.google.com"
+                "text" : "Your answers and the priority grid of the key areas show you need to work on your MESSAGING right now",
+                "url" : "https://www.themakers.academy/free-stuff/makers-audit-tool/result-messaging/"
             }
         },
         {
@@ -159,8 +159,8 @@ function initSurvey() {
             "goodScore": 6,
             "priority": 4,
             "result" : {
-                "text" : "this is the text",
-                "url" : "www.google.com"
+                "text" : "Your answers and the priority grid of the key areas show you need to work on your WEBSITE right now",
+                "url" : "https://www.themakers.academy/free-stuff/makers-audit-tool/result-website/"
             }
         },
         {
@@ -179,8 +179,8 @@ function initSurvey() {
             "goodScore": 5,
             "priority": 5,
             "result" : {
-                "text" : "this is the text",
-                "url" : "www.google.com"
+                "text" : "Your answers and the priority grid of the key areas show you need to work on your PLAN right now",
+                "url" : "https://www.themakers.academy/free-stuff/makers-audit-tool/result-plan/"
             }
         },
         {
@@ -201,8 +201,8 @@ function initSurvey() {
             "goodScore": 6,
             "priority": 6,
             "result" : {
-                "text" : "this is the text",
-                "url" : "www.google.com"
+                "text" : "Your answers and the priority grid of the key areas show you need to work on your MARKETING right now",
+                "url" : "https://www.themakers.academy/free-stuff/makers-audit-tool/result-marketing"
             }
         },
         {
@@ -225,8 +225,8 @@ function initSurvey() {
             "goodScore": 7,
             "priority": 7,
             "result" : {
-                "text" : "this is the text",
-                "url" : "www.google.com"
+                "text" : "Your answers and the priority grid of the key areas show you need to work on your OPERATIONS right now",
+                "url" : "https://www.themakers.academy/free-stuff/makers-audit-tool/result-operations"
             }
         }
     ]
@@ -365,9 +365,15 @@ function renderResult() {
     var question = survey.questions.find(m=> m.answer < m.goodScore);
 
     var container = document.body.querySelector("#survey-container");
-    var href = `href='${question.result.url}'`;
-    var link = buildTag("a", question.result.url, href);
-    var span = buildTag("p", question.result.text);
+    var href = `href='https://www.themakers.academy/contact/'`;
+    var link = buildTag("a", "If that doesn't sound quite right or you just need a bit more guidance, feel free to EMAIL ME directly!", href);
+    var span = buildTag("p", "Your answers show that you have things pretty well under control in terms of the key areas of your business!");
+    var target = " target='_blank'";
+    if (question){
+        href = `href='${question.result.url}'`;
+        link = buildTag("a", "CLICK HERE for more about your result and recommendations on what to do next", href + target);
+        span = buildTag("p", question.result.text);
+    }
     container.insertAdjacentHTML('beforeend', buildTag("div", span + link, "id=survey-finale"));
 }
 
