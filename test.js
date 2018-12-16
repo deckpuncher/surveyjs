@@ -371,7 +371,7 @@ function renderResult() {
     var target = " target='_blank'";
     if (question){
         href = `href='${question.result.url}'`;
-        link = buildTag("a", "CLICK HERE for more about your result and recommendations on what to do next", href + target);
+        link = buildTag("a", "GET RESULTS", href + target);
         span = buildTag("p", question.result.text);
     }
     container.insertAdjacentHTML('beforeend', buildTag("div", span + link, "id=survey-finale"));
