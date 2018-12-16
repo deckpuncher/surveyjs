@@ -71,14 +71,13 @@ function initSurvey() {
                 "I know the greater purpose of my business and the change I want to make in people’s lives",
                 "I understand why I think it's important that I run my own business, as opposed to being in traditional employment"
             ],
-            "rules": [
-                {
-                    "requiredScore": 3,
-                    "result": "Your answers and the priority grid of the key areas show you need to work on your VISION and WHY right now."
-                }
-            ],
             "answer": null,
-            "priority": 1
+            "goodScore": 3,
+            "priority": 1,
+            "result" : {
+                "text" : "this is the text",
+                "url" : "www.google.com"
+            }
         },
         {
             "heading": "Your PRODUCT",
@@ -92,14 +91,13 @@ function initSurvey() {
                 "I can easily list all the benefits that the features of my product brings to my customer",
                 "I know where my product sits in the product market"
             ],
-            "rules": [
-                {
-                    "requiredScore": 4,
-                    "result": "Your answers and the priority grid of the key areas show you need to work on your PRODUCT right now."
-                }
-            ],
             "answer": null,
-            "priority": 2
+            "goodScore": 4,
+            "priority": 2,
+            "result" : {
+                "text" : "this is the text",
+                "url" : "www.google.com"
+            }
         },
         {
             "heading": "Your CUSTOMER",
@@ -115,14 +113,13 @@ function initSurvey() {
                 "I know the demographics of my customer well",
                 "I know the psychographics and behaviours of my customer well"
             ],
-            "rules": [
-                {
-                    "requiredScore": 6,
-                    "result": "Your answers and the priority grid of the key areas show you need to work on your CUSTOMER right now."
-                }
-            ],
+            "goodScore": 6,
             "answer": null,
-            "priority": 2
+            "priority": 2,
+            "result" : {
+                "text" : "this is the text",
+                "url" : "www.google.com"
+            }
         },
         {
             "heading": "Your MESSAGING",
@@ -136,14 +133,13 @@ function initSurvey() {
                 "My visual branding is consistent with my business personality",
                 "My photography is high-quality across all touch-points"
             ],
-            "rules": [
-                {
-                    "requiredScore": 4,
-                    "result": "Your answers and the priority grid of the key areas show you need to work on your MESSAGING right now."
-                }
-            ],
             "answer": null,
-            "priority": 3
+            "goodScore": 5,
+            "priority": 3,
+            "result" : {
+                "text" : "this is the text",
+                "url" : "www.google.com"
+            }
         },
         {
             "heading": "Your WEBSITE",
@@ -159,14 +155,13 @@ function initSurvey() {
                 "I understand how SEO works to drive organic traffic to my website",
                 "I have an email list to build relationships with my customers"
             ],
-            "rules": [
-                {
-                    "requiredScore": 6,
-                    "result": "Your answers and the priority grid of the key areas show you need to work on your WEBSITE right now."
-                }
-            ],
             "answer": null,
-            "priority": 4
+            "goodScore": 6,
+            "priority": 4,
+            "result" : {
+                "text" : "this is the text",
+                "url" : "www.google.com"
+            }
         },
         {
             "heading": "Your PLAN",
@@ -180,14 +175,13 @@ function initSurvey() {
                 "I have clear income goals and I know how much I have to sell to achieve these",
                 "I follow action plans for every goal I set"
             ],
-            "rules": [
-                {
-                    "requiredScore": 4,
-                    "result": "Your answers and the priority grid of the key areas show you need to work on your PLAN right now."
-                }
-            ],
             "answer": null,
-            "priority": 5
+            "goodScore": 5,
+            "priority": 5,
+            "result" : {
+                "text" : "this is the text",
+                "url" : "www.google.com"
+            }
         },
         {
             "heading": "Your MARKETING",
@@ -203,14 +197,13 @@ function initSurvey() {
                 "I know how to target my customers effectively when using advertising",
                 "I track all my marketing efforts and know what works and what doesn't for my business"
             ],
-            "rules": [
-                {
-                    "requiredScore": 6,
-                    "result": "Your answers and the priority grid of the key areas show you need to work on your MARKETING right now."
-                }
-            ],
             "answer": null,
-            "priority": 6
+            "goodScore": 6,
+            "priority": 6,
+            "result" : {
+                "text" : "this is the text",
+                "url" : "www.google.com"
+            }
         },
         {
             "heading": "Your OPERATIONS",
@@ -228,14 +221,13 @@ function initSurvey() {
                 "I have scheduled time for gathering inspiration and filling my creative mind",
                 "I have set times in my schedule for rest and rejuvenation"
             ],
-            "rules": [
-                {
-                    "requiredScore": 8,
-                    "result": "Your answers and the priority grid of the key areas show you need to work on your OPERATIONS right now."
-                }
-            ],
             "answer": null,
-            "priority": 7
+            "goodScore": 7,
+            "priority": 7,
+            "result" : {
+                "text" : "this is the text",
+                "url" : "www.google.com"
+            }
         }
     ]
 
@@ -248,7 +240,10 @@ function renderSurvey(survey) {
     // document.body.insertAdjacentHTML('beforeend', buildTag("div", "", "id='survey-container'"));
     survey.questions.forEach(renderQuestion);
     //renderQuestion(survey.yesNoQuestions[0], 0);
+    var container = document.body.querySelector("#survey-container");
+    container.insertAdjacentHTML('beforeend', buildTag("p", "Makers Priority Grid"));
     renderGrid();
+    renderResult();
 }
 
 function renderQuestion(question, questionNumber) {
@@ -307,6 +302,7 @@ function answerClicked(button) {
     button.classList.add("answered");
     //renderAnswerResponse(rule, parent);
     renderGrid();
+    renderResult();
 }
 
 function renderGrid() {
@@ -325,7 +321,7 @@ function renderGrid() {
     var closeRow = false;
 
     questions.forEach(function (question, index) {
-        var warning = question.answer ? question.answer < (question.statements.length / 2) : false;
+        var warning = question.answer ? question.answer < question.goodScore : false;
         if (priority !== question.priority) {
             priority = question.priority;
 
@@ -354,6 +350,25 @@ function renderGrid() {
 
     var container = document.body.querySelector("#survey-container");
     container.insertAdjacentHTML('beforeend', buildTag("table", tableRows.join(""), "id='survey-results'"));
+}
+
+function renderResult() {
+    var finale = document.querySelector("#survey-finale");
+    if (finale) {
+        finale.parentNode.removeChild(finale);
+    }
+
+    if (survey.questions.some(m => !m.answer)) {
+        return;
+    }
+
+    var question = survey.questions.find(m=> m.answer < m.goodScore);
+
+    var container = document.body.querySelector("#survey-container");
+    var href = `href='${question.result.url}'`;
+    var link = buildTag("a", question.result.url, href);
+    var span = buildTag("p", question.result.text);
+    container.insertAdjacentHTML('beforeend', buildTag("div", span + link, "id=survey-finale"));
 }
 
 function renderAnswerResponse(rule, parent) {
@@ -420,15 +435,7 @@ function buildTag(tag, value, attributes) {
 }
 
 function recordAnswer(question, score) {
-    var ruleToFire = null;
-    question.rules.forEach(function (rule) {
-        if (score >= rule.requiredScore) {
-            ruleToFire = rule;
-        }
-    })
-
     question.answer = score;
-    return ruleToFire;
 }
 
 var survey = new Survey();
